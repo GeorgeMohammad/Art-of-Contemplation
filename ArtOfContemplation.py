@@ -56,7 +56,37 @@ def ItemRemover(targetVal, targetList):
     else:
         print ("Invalid Input. Not a list")
 
-
+#Recordes a list, dataSet, in a csv file.
+def Logger(dataSet):
+    colTitles = ["TimerValue", "Date", "QualityEvaluation", "FocusEvaluation"]
+    colTitleFlag = True
+    try:
+        fileI = open("log.csv", "r")
+        fileContents = fileI.read()
+        fileI.close()
+        open("log.csv", "r")
+        for i in colTitles:
+            if (i not in fileContents):
+                raise
+    except:
+        fileO = open("log.csv", "w")
+        for i in colTitles:
+            fileO.write(i + ",")
+        fileO.write("\n")
+        fileO.close()
+    finally:
+        if (colTitleFlag):
+            fileO = open("log.csv", "a")
+            if ((type(dataSet) is list) and (len(dataSet) == len(colTitles))):
+                for i in dataSet:
+                    if (type(i) is str):
+                        fileO.write(i + ",")
+                    else:
+                        print (i, "is not a string")
+                fileO.write("\n")
+            fileO.close()
+            
+    
 ##The following is just test code.
 ##testList = [1, 2, 3]
 ##print(Encourager(testList))
@@ -70,3 +100,5 @@ def ItemRemover(targetVal, targetList):
 ##fileList = FileReader()
 ##print (fileList)
 
+##dataSet = ["d", "f", "l", "d"]
+##Logger(dataSet)
