@@ -1,5 +1,6 @@
 import time
 import random
+import datetime
 #This program is a timer that helps you learn Aristotle's Art of Contemplation.
 
 
@@ -86,7 +87,6 @@ def Logger(dataSet):
                 fileO.write("\n")
             fileO.close()
             
-    
 ##The following is just test code.
 ##testList = [1, 2, 3]
 ##print(Encourager(testList))
@@ -102,3 +102,7 @@ def Logger(dataSet):
 
 ##dataSet = ["d", "f", "l", "d"]
 ##Logger(dataSet)
+
+currentDateTime = datetime.datetime.now()
+dateStr = currentDateTime.strftime("%d-%m-%Y")
+#print(dateStr)
