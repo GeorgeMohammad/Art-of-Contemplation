@@ -86,23 +86,12 @@ def Logger(dataSet):
                         print (i, "is not a string")
                 fileO.write("\n")
             fileO.close()
-            
-##The following is just test code.
-##testList = [1, 2, 3]
-##print(Encourager(testList))
-##print("String Encourager Test: ", Encourager("f"))
-##print("Integer Encourager Test: ", Encourager(1))
-##ItemRemover(1, testList)
-##ItemRemover(2, "k")
-##print (testList)
-##FileWriter("\ntest\n")
-##FileWriter(1)
-##fileList = FileReader()
-##print (fileList)
 
-##dataSet = ["d", "f", "l", "d"]
-##Logger(dataSet)
-
-currentDateTime = datetime.datetime.now()
-dateStr = currentDateTime.strftime("%d-%m-%Y")
-#print(dateStr)
+quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry")
+medalList = []
+while (quitCheck.lower() != "q"):
+    if (quitCheck.lower() == "a"):
+        userMedalEntry = input("Entry: ")
+        medalList.append(userMedalEntry)
+        print(medalList)
+    quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry")
