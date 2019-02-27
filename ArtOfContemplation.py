@@ -9,7 +9,8 @@ def GetTime():
     finished = False
     startTime = time.time()
     while (not(finished)):
-        quitCheck = input("q)uit, anything else to continue").lower()
+        quitCheck = input("q)uit, timer has started, " + \
+                          "anything else to continue").lower()
         if (quitCheck == 'q'):
             finished = True
     endTime = time.time()
@@ -57,7 +58,8 @@ def ItemRemover(targetVal, targetList):
     else:
         print ("Invalid Input. Not a list")
 
-#Recordes a list, dataSet, in a csv file.
+#Recordes a list, dataSet, whose length is equal to colTitles length
+#in a csv file.
 def Logger(dataSet):
     colTitles = ["TimerValue", "Date", "QualityEvaluation", "FocusEvaluation"]
     colTitleFlag = True
@@ -87,11 +89,18 @@ def Logger(dataSet):
                 fileO.write("\n")
             fileO.close()
 
-quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry")
+quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry, L)og data")
 medalList = []
 while (quitCheck.lower() != "q"):
     if (quitCheck.lower() == "a"):
         userMedalEntry = input("Entry: ")
         medalList.append(userMedalEntry)
         print(medalList)
-    quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry")
+    if (quitCheck.upper() == "L"):
+        timerVal = str(GetTime())
+        date = input("Enter a date (dd/mm/yyyy): ")
+        qualityEvaluation = input("How did it go in terms of quality(1-100): ")
+        focusEvaluation = input("How was your focus (1-100): ")
+        dataSet = [timerVal, date, qualityEvaluation, focusEvaluation]
+        Logger(dataSet)
+    quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry, L)og data")
