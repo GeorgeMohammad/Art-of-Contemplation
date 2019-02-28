@@ -91,11 +91,21 @@ def Logger(dataSet):
 
 quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry, L)og data")
 medalList = []
+
+#main menu
 while (quitCheck.lower() != "q"):
+#add medal list entry
     if (quitCheck.lower() == "a"):
         userMedalEntry = input("Entry: ")
         medalList.append(userMedalEntry)
-        print(medalList)
+#delete medal list entry
+    if (quitCheck.lower() == "d"):
+        entry2Delete = input("Enter an entry to delete: ")
+        if (entry2Delete in medalList):
+            medalList.remove(entry2Delete)
+        else:
+            print("That value isn't in the list.")
+#Create log entry
     if (quitCheck.upper() == "L"):
         timerVal = str(GetTime())
         date = input("Enter a date (dd/mm/yyyy): ")
