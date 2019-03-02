@@ -1,5 +1,6 @@
 import time
 import random
+import datetime
 #This program is a timer that helps you learn Aristotle's Art of Contemplation.
 
 
@@ -8,7 +9,8 @@ def GetTime():
     finished = False
     startTime = time.time()
     while (not(finished)):
-        quitCheck = input("q)uit, anything else to continue").lower()
+        quitCheck = input("q)uit, timer has started, " + \
+                          "anything else to continue").lower()
         if (quitCheck == 'q'):
             finished = True
     endTime = time.time()
@@ -56,17 +58,59 @@ def ItemRemover(targetVal, targetList):
     else:
         print ("Invalid Input. Not a list")
 
+#Recordes a list, dataSet, whose length is equal to colTitles length
+#in a csv file.
+def Logger(dataSet):
+    colTitles = ["TimerValue", "Date", "QualityEvaluation", "FocusEvaluation"]
+    colTitleFlag = True
+    try:
+        fileI = open("log.csv", "r")
+        fileContents = fileI.read()
+        fileI.close()
+        open("log.csv", "r")
+        for i in colTitles:
+            if (i not in fileContents):
+                raise
+    except:
+        fileO = open("log.csv", "w")
+        for i in colTitles:
+            fileO.write(i + ",")
+        fileO.write("\n")
+        fileO.close()
+    finally:
+        if (colTitleFlag):
+            fileO = open("log.csv", "a")
+            if ((type(dataSet) is list) and (len(dataSet) == len(colTitles))):
+                for i in dataSet:
+                    if (type(i) is str):
+                        fileO.write(i + ",")
+                    else:
+                        print (i, "is not a string")
+                fileO.write("\n")
+            fileO.close()
 
-##The following is just test code.
-##testList = [1, 2, 3]
-##print(Encourager(testList))
-##print("String Encourager Test: ", Encourager("f"))
-##print("Integer Encourager Test: ", Encourager(1))
-##ItemRemover(1, testList)
-##ItemRemover(2, "k")
-##print (testList)
-##FileWriter("\ntest\n")
-##FileWriter(1)
-##fileList = FileReader()
-##print (fileList)
+quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry, L)og data")
+medalList = []
 
+#main menu
+while (quitCheck.lower() != "q"):
+#add medal list entry
+    if (quitCheck.lower() == "a"):
+        userMedalEntry = input("Entry: ")
+        medalList.append(userMedalEntry)
+#delete medal list entry
+    if (quitCheck.lower() == "d"):
+        entry2Delete = input("Enter an entry to delete: ")
+        if (entry2Delete in medalList):
+            medalList.remove(entry2Delete)
+        else:
+            print("That value isn't in the list.")
+#Create log entry
+    if (quitCheck.upper() == "L"):
+        timerVal = str(GetTime())
+        date = input("Enter a date (dd/mm/yyyy): ")
+        qualityEvaluation = input("How did it go in terms of quality(1-100): ")
+        focusEvaluation = input("How was your focus (1-100): ")
+        dataSet = [timerVal, date, qualityEvaluation, focusEvaluation]
+        Logger(dataSet)
+    quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry, L)og data")
