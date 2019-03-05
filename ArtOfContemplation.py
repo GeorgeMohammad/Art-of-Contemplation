@@ -60,8 +60,8 @@ def ItemRemover(targetVal, targetList):
 
 #Recordes a list, dataSet, whose length is equal to colTitles length
 #in a csv file.
-def Logger(dataSet):
-    colTitles = ["TimerValue", "Date", "QualityEvaluation", "FocusEvaluation"]
+def Logger(dataSet, colTitles):
+    #colTitles = ["TimerValue", "Date", "QualityEvaluation", "FocusEvaluation"]
     colTitleFlag = True
     try:
         fileI = open("log.csv", "r")
@@ -89,7 +89,15 @@ def Logger(dataSet):
                 fileO.write("\n")
             fileO.close()
 
-quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry, L)og data")
+menu = "q)uit, a)dd medal entry, d)elete medal entry, " +\
+       "L)og data"
+#"W)hat's the last thing you ate, " +/
+ #       "Wh)en did you last eat, Wha)t did you do before contemplating."
+
+#Column titles in the data file written to by Logger()
+colTitles = ["TimerValue", "Date", "QualityEvaluation", "FocusEvaluation",
+             "FoodLastEaten", "WhenYouAte", "ActivityBeforeContemplation"]
+quitCheck = input(menu)
 medalList = []
 
 #main menu
@@ -109,8 +117,12 @@ while (quitCheck.lower() != "q"):
     if (quitCheck.upper() == "L"):
         timerVal = str(GetTime())
         date = input("Enter a date (dd/mm/yyyy): ")
-        qualityEvaluation = input("How did it go in terms of quality(1-100): ")
+        qualityEvaluation = input("How did it go in terms of quality(1-100)? ")
         focusEvaluation = input("How was your focus (1-100): ")
-        dataSet = [timerVal, date, qualityEvaluation, focusEvaluation]
-        Logger(dataSet)
-    quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry, L)og data")
+        lastFood = input("Enter the last thing you ate: ")
+        whenAte = input("How many hours ago did you eat (enter as a decimal)? ")
+        previousActivity = input("What did you do before Contemplating? ")
+        dataSet = [timerVal, date, qualityEvaluation, focusEvaluation,
+                   lastFood, whenAte, previousActivity]
+        Logger(dataSet, colTitles)
+    quitCheck = input(menu)
