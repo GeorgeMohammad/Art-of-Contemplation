@@ -114,3 +114,4 @@ while (quitCheck.lower() != "q"):
         dataSet = [timerVal, date, qualityEvaluation, focusEvaluation]
         Logger(dataSet)
     quitCheck = input("q)uit, a)dd medal entry, d)elete medal entry, L)og data")
+    #
